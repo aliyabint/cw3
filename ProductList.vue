@@ -46,12 +46,11 @@
           </button>
 
           <button disabled="disabled" v-else>Add To Cart</button>
-          <span v-if="product.availableInventory === 0"
-            >All out!</span
+          <span v-if="product.availableInventory === 0" > All out!</span
           >
           <span
-            v-else-if= "product.availableInventory - cartCount(product.id) < 10">
-            Only {{ product.availableInventory - cartCount(product.id) }} left!
+            v-else-if="product.availableInventory - cartCount(product.id) ">
+            Only {{ product.availableInventory}} left!
           </span>
           <span v-else> Buy now! </span>
         </div>

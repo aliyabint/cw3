@@ -60,8 +60,11 @@ export default {
   methods: {
     addToCart(product) {
       console.log("addProduct event received by the root component.");
+      product.availableInventory--;
       this.cart.push(product);
+      
     },
+
 
     toggleCart() {
       this.showProduct = !this.showProduct;
