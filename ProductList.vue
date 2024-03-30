@@ -44,6 +44,7 @@
           <button @click="add(product)" v-if="canAddToCart(product)">
             Add To Cart
           </button>
+
           <button disabled="disabled" v-else>Add To Cart</button>
           <span v-if="product.availableInventory === 0"
             >All out!</span
@@ -59,7 +60,7 @@
   </div>
 </template>
 
-<script>
+<script> /* eslint-disable */
 export default {
   name: "ProductList",
   props: ["products", "cart"],

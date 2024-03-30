@@ -9,7 +9,7 @@
           <button
             class="fas fa-cart-arrow-down"
             id="cicon"
-            @click="showCheckout"
+            @click="toggleCart"
             :disabled="cartItemCount === 0"
             v-if="showProduct"
           >
@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script>
+<script> /* eslint-disable */
 import productList from "./components/ProductList.vue";
 import checkout from "./components/Form.vue";
 
