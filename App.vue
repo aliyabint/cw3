@@ -28,7 +28,8 @@
   </div>
 </template>
 
-<script> /* eslint-disable */
+<script>
+/* eslint-disable */
 import productList from "./components/ProductList.vue";
 import checkout from "./components/Form.vue";
 
@@ -58,32 +59,31 @@ export default {
     });
   },
   methods: {
-    showCheckout() {},
     addToCart(product) {
       console.log("addProduct event received by the root component.");
       this.cart.push(product);
     },
-  },
 
-  removeProduct(id) {
-    let found = false;
-    function rearrangingCart(cartItem) {
-      if (found == false) {
-        if (cartItem == id) {
-          found = true;
+    toggleCart() {
+      this.showProduct = !this.showProduct;
+    },
+
+    removeProduct(id) {
+      let found = false;
+      function rearrangingCart(cartItem) {
+        if (found == false) {
+          if (cartItem == id) {
+            found = true;
+          } else {
+            return cartItem;
+          }
         } else {
           return cartItem;
         }
-      } else {
-        return cartItem;
       }
-    }
-    this.cart = this.cart.filter(rearrangingCart);
-    var prodid = this.cart.findIndex((product) => product.id === id);
-  },
-
-  toggleCart() {
-    this.showProduct = !this.showProduct;
+      this.cart = this.cart.filter(rearrangingCart);
+      var prodid = this.cart.findIndex((product) => product.id === id);
+    },
   },
 
   computed: {
