@@ -19,9 +19,7 @@
     </header>
     <main>
       <product-list :products="products" @addProduct="addToCart"></product-list>
-       
-
-      <checkout :cart="cart"></checkout>
+      <checkout :cart="cart" @remove-item="removeProduct"></checkout>
     </main>
   </div>
 </template>
@@ -63,6 +61,25 @@ export default {
       this.cart.push(product);
     },
   },
+
+  removeProduct(id) {
+            let found = false;
+            function rearrangingCart(cartItem) {
+                if (found == false) {
+                    if (cartItem == id) {
+                        found = true;
+                    }
+                    else {
+                        return cartItem;
+                    }
+                }
+                else {
+                    return cartItem;
+                }
+            }
+            this.cart = this.cart.filter(rearrangingCart);
+            var prodid = this.cart.findIndex(product => product.id === id);
+        },
 
   computed: {
     cartItemCount: function () {
