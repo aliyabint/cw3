@@ -6,16 +6,6 @@
           <h1>{{ sitename }}</h1>
         </div>
         <div class="navbar-menu">
-          <!-- <button
-            class="fas fa-cart-arrow-down"
-            id="cicon"
-            @click="toggleCart"
-            :disabled="cartItemCount === 0"
-            v-if="showProduct"
-          >
-            {{ this.cart.length }}
-          </button> -->
-
           <button
             class="fas fa-shopping-cart"
             @click="toggleCart"
@@ -23,12 +13,15 @@
           >
             {{ this.cart.length }}
           </button>
-          
         </div>
       </nav>
     </header>
     <main>
-      <product-list :products="products" @addProduct="addToCart" v-if="showProduct"></product-list>
+      <product-list
+        :products="products"
+        @addProduct="addToCart"
+        v-if="showProduct"
+      ></product-list>
       <checkout :cart="cart" @remove-item="removeProduct" v-else></checkout>
     </main>
   </div>
@@ -75,26 +68,18 @@ export default {
     },
 
     removeProduct(id) {
-      let found = false;
-      function rearrangingCart(cartItem) {
-        if (found == false) {
-          if (cartItem == id) {
-            found = true;
-          } else {
-            return cartItem;
-          }
-        } else {
-          return cartItem;
-        }
+      const index = this.cart.findIndex((product) => product.id === id);
+
+      // If the product is found, remove it from the cart
+      if (index !== -1) {
+        this.cart.splice(index, 1);
       }
-      this.cart = this.cart.filter(rearrangingCart);
-      var prodid = this.cart.findIndex((product) => product.id === id);
     },
   },
 
   computed: {
     cartItemCount: function () {
-      return this.cart.length || " ";
+      return this.cart.length;
     },
   },
 };
