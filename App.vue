@@ -6,7 +6,7 @@
           <h1>{{ sitename }}</h1>
         </div>
         <div class="navbar-menu">
-          <button
+          <!-- <button
             class="fas fa-cart-arrow-down"
             id="cicon"
             @click="toggleCart"
@@ -14,16 +14,22 @@
             v-if="showProduct"
           >
             {{ this.cart.length }}
-          </button>
-          <button class="fas fa-cart-arrow-down" id="cicon" v-else>
+          </button> -->
+
+          <button
+            class="fas fa-shopping-cart"
+            @click="toggleCart"
+            :disabled="cartItemCount === 0"
+          >
             {{ this.cart.length }}
           </button>
+          
         </div>
       </nav>
     </header>
     <main>
-      <product-list :products="products" @addProduct="addToCart"></product-list>
-      <checkout :cart="cart" @remove-item="removeProduct"></checkout>
+      <product-list :products="products" @addProduct="addToCart" v-if="showProduct"></product-list>
+      <checkout :cart="cart" @remove-item="removeProduct" v-else></checkout>
     </main>
   </div>
 </template>
